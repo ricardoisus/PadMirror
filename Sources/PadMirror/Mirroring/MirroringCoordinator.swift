@@ -29,7 +29,7 @@ final class MirroringCoordinator: ObservableObject {
             guard allowed else { message = USBError.permission.localizedDescription; return }
             do {
                 try discovery.enable { [weak self] in
-                    Task { @MainActor in self?.refresh() }
+                    Task { @MainActor [weak self] in self?.refresh() }
                 }
             } catch { message = error.localizedDescription; return }
             ready = true
@@ -41,7 +41,7 @@ final class MirroringCoordinator: ObservableObject {
             ]
             for name in sessionNotifications {
                 observers.append(NotificationCenter.default.addObserver(forName: name, object: engine.session, queue: .main) { [weak self] _ in
-                    Task { @MainActor in
+                    Task { @MainActor [weak self] in
                         guard let self else { return }
                         self.generation += 1
                         self.engine.stop()
@@ -52,7 +52,7 @@ final class MirroringCoordinator: ObservableObject {
             }
             // Handles delayed trust/unlock publication as well as hotplug notifications.
             timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] _ in
-                Task { @MainActor in self?.refresh() }
+                Task { @MainActor [weak self] in self?.refresh() }
             }
             refresh()
         }
