@@ -1,7 +1,7 @@
 # Arquitetura
 ## USB primeiro
 AppKit cria NSWindow real. SwiftUI apresenta estado e seletor; NSView hospeda AVCaptureVideoPreviewLayer com resizeAspect. CoreMediaIO habilita screen capture e desabilita wireless capture explicitamente. DiscoverySession external/muxed procura fontes iOS; nenhuma heurística por nome iPhone. A classificação como USB usa transportType USB para evitar selecionar webcams ou fontes wireless. Compatibilidade dessa classificação precisa de hardware.
-AVCaptureSession é configurada e iniciada/parada numa fila serial fora da main thread. PreviewLayer usa a sessão diretamente, sem callbacks de frame, cópias manuais, saída de áudio ou gravação. Main thread cuida da UI. O estado distingue sessão iniciada de vídeo observado (isPreviewing).
+AVCaptureSession é configurada e iniciada/parada numa fila serial fora da main thread. PreviewLayer usa a sessão diretamente, sem callbacks de frame, cópias manuais, saída de áudio ou gravação. Main thread cuida da UI. O estado sessionRunning significa somente que startRunning retornou com sessão ativa; não confirma entrega de frames. isPreviewing e inputPriority são indisponíveis no macOS (confirmado pelo compilador e headers), portanto não são usados. A confirmação visual é obrigatória.
 ## Limitações da primeira prova
 PreviewLayer preserva proporção; rotação depende dos metadados fornecidos pelo dispositivo e deve ser validada. Não forçamos rotação ou resolução arbitrária. Sem métricas falsas: PreviewLayer não expõe timestamps individuais de apresentação. Instrumentação de frames opt-in só será adicionada se necessária após a prova, pois VideoDataOutput altera o pipeline medido.
 ## AirPlay — decisão adiada até gate USB
