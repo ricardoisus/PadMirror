@@ -2,7 +2,7 @@
 
 Status: NOT TESTED WITH PHYSICAL DEVICE.
 
-Local checks: Debug and Release builds pass; ad-hoc signature verified; initial NSWindow inspected visually. Six device-selection cases pass using the CLT runner. Full XCTest requires Xcode and is configured in CI.
+Local checks: Debug and Release builds pass; ad-hoc signature verified; initial NSWindow inspected visually. After accepting the locally observed external/muxed source (transport other), the session started but the preview remained black. This is NOT successful mirroring; connect/unlock/trust the physical iPad to continue diagnosis. Six device-selection cases pass using the CLT runner. Full XCTest requires Xcode and is configured in CI.
 
 1. Build with `./scripts/build.sh`; quit QuickTime and other capture apps.
 2. Open `build/PadMirror.app`. Without iPad, expect a normal resizable window and a USB connection hint.

@@ -4,11 +4,12 @@ import CoreMediaIO
 import os
 
 final class USBDeviceDiscovery {
+    private var observation: NSKeyValueObservation?
     private var lastCounts = ""
     private var discovery: AVCaptureDevice.DiscoverySession?
     private let logger = Logger(subsystem: "org.padmirror.PadMirror", category: "USBDiscovery")
 
-    func enable() throws {
+    func enable(onChange: @escaping () -> Void = {}) throws {
         for (selector, value) in [
             (kCMIOHardwarePropertyAllowScreenCaptureDevices, UInt32(1)),
             (kCMIOHardwarePropertyAllowWirelessScreenCaptureDevices, UInt32(0))
@@ -24,6 +25,9 @@ final class USBDeviceDiscovery {
             }
         }
         discovery = AVCaptureDevice.DiscoverySession(deviceTypes: [.external], mediaType: .muxed, position: .unspecified)
+        observation = discovery?.observe(\.devices, options: [.new]) { _, _ in
+            DispatchQueue.main.async(execute: onChange)
+        }
         logger.info("Screen capture discovery enabled; wireless excluded")
     }
 

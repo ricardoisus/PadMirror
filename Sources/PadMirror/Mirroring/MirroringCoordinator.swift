@@ -27,13 +27,12 @@ final class MirroringCoordinator: ObservableObject {
             default: allowed = false
             }
             guard allowed else { message = USBError.permission.localizedDescription; return }
-            do { try discovery.enable() } catch { message = error.localizedDescription; return }
-            ready = true
-            for name in [AVCaptureDevice.wasConnectedNotification, AVCaptureDevice.wasDisconnectedNotification] {
-                observers.append(NotificationCenter.default.addObserver(forName: name, object: nil, queue: .main) { [weak self] _ in
+            do {
+                try discovery.enable { [weak self] in
                     Task { @MainActor in self?.refresh() }
-                })
-            }
+                }
+            } catch { message = error.localizedDescription; return }
+            ready = true
             for name in [AVCaptureSession.runtimeErrorNotification, AVCaptureSession.wasInterruptedNotification] {
                 observers.append(NotificationCenter.default.addObserver(forName: name, object: engine.session, queue: .main) { [weak self] _ in
                     Task { @MainActor in
