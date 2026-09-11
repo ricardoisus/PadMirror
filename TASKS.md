@@ -7,7 +7,7 @@ Milestone 1 — aguardando validação física USB. Iniciado em 2026-09-10.
 - [x] CoreMediaIO, discovery external/muxed com wireless desabilitado, PreviewLayer direto e NSWindow real.
 - [x] Seleção, observação de hotplug, tentativa manual e sessão em fila serial.
 - [x] Debug/Release compilados e bundle ad-hoc verificado localmente (Swift 6.3.3, SDK macOS 26).
-- [x] Seis casos comportamentais passaram via runner CLT; XCTest depende de Xcode completo e será executado no CI.
+- [x] Seis casos comportamentais passaram via runner CLT e XCTest no CI. Build Release, empacotamento e upload também passaram no código 527e37f: https://github.com/ricardoisus/PadMirror/actions/runs/34548785404.
 - [x] Janela inicial inspecionada visualmente; depois da correção de descoberta, sessão iniciou com fonte muxed, mas preview permaneceu preto. Não foi observada imagem de iPad.
 ## Próximos passos
 - [ ] Usuário conectar iPad físico; seguir docs/MANUAL_TEST_PLAN.md.
