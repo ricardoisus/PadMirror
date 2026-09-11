@@ -4,8 +4,8 @@ AppKit cria NSWindow real. SwiftUI apresenta estado e seletor; NSView hospeda AV
 AVCaptureSession é configurada e iniciada/parada numa fila serial fora da main thread. PreviewLayer usa a sessão diretamente, sem callbacks de frame, cópias manuais, saída de áudio ou gravação. Main thread cuida da UI. O estado sessionRunning significa somente que startRunning retornou com sessão ativa; não confirma entrega de frames. isPreviewing e inputPriority são indisponíveis no macOS (confirmado pelo compilador e headers), portanto não são usados. A confirmação visual é obrigatória.
 ## Limitações da primeira prova
 PreviewLayer preserva proporção; rotação depende dos metadados fornecidos pelo dispositivo e deve ser validada. Não forçamos rotação ou resolução arbitrária. Sem métricas falsas: PreviewLayer não expõe timestamps individuais de apresentação. Instrumentação de frames opt-in só será adicionada se necessária após a prova, pois VideoDataOutput altera o pipeline medido.
-## AirPlay — decisão adiada até gate USB
-Avaliar Popyachsa uxplay-core/C ABI antes de escolher helper/IPC. Um NSView/NSWindow de outro processo não pode ser tratado como ponteiro local; helper exige transporte de superfície/frames ou integração documentada. Não lançar a GUI upstream como uma segunda interface. Preservar pairing/PIN e áudio opcional. Nenhuma engine incorporada nesta fase.
+## AirPlay — C ABI nativa
+Após confirmação visual do Freeform via USB e autorização do usuário, Popyachsa/UxPlay é integrado via dylib, renderizando em NSView da mesma janela. O core é serializado fora da main thread; senha aleatória por ativação, áudio off e troca de backend explícita. [Decisão, versões, privacidade e build](AIRPLAY.md).
 ## APIs e procedência
 Implementação original baseada nos headers do SDK Apple e documentação pública. Apenas README/LICENSE de MirrorKit consultados; nenhuma implementação lida ou copiada.
 - https://developer.apple.com/documentation/coremediaio/kcmiohardwarepropertyallowscreencapturedevices

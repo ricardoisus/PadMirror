@@ -10,4 +10,6 @@
 <key>LSMinimumSystemVersion</key><string>14.0</string>
 <key>NSHighResolutionCapable</key><true/>
 <key>NSCameraUsageDescription</key><string>O PadMirror usa a captura de vídeo do macOS para mostrar a tela do iPad ou iPhone conectado por USB.</string>
+<key>NSLocalNetworkUsageDescription</key><string>O PadMirror recebe a tela do iPad via AirPlay na sua rede local, com código de acesso.</string>
+<key>NSBonjourServices</key><array><string>_airplay._tcp</string><string>_raop._tcp</string></array>
 </dict></plist>

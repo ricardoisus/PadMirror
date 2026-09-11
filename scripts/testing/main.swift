@@ -9,3 +9,8 @@ for item in SelectionCase.all {
     }
     print("PASS: \(item.name)")
 }
+
+AirPlayCases.run { passed, name in
+    guard passed else { fputs("FAIL: \(name)\n", stderr); exit(1) }
+    print("PASS: \(name)")
+}

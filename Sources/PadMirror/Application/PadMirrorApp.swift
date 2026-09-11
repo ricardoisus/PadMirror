@@ -41,5 +41,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         window.makeKeyAndOrderFront(nil)
         return true
     }
-    func applicationWillTerminate(_ notification: Notification) { coordinator.shutdown() }
+    func applicationShouldTerminate(_ sender: NSApplication) -> NSApplication.TerminateReply {
+        coordinator.shutdown { sender.reply(toApplicationShouldTerminate: true) }
+        // Keep Cocoa's run loop alive while the engine joins its worker.
+        return .terminateLater
+    }
 }

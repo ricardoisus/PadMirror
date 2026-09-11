@@ -1,2 +1,4 @@
 # Sandbox and distribution
 Initial local app is not App Sandbox enabled. Camera privacy consent is required through NSCameraUsageDescription. No microphone use, Apple Events, screen recording API or QuickTime automation. No private entitlements. Bundle is ad-hoc signed for reproducible local testing, not notarized for distribution. Developer ID, hardened runtime camera entitlement and notarization must be validated before releases. App Store/sandbox compatibility remains untested.
+
+AirPlay requests Local Network access and declares _airplay._tcp / _raop._tcp. No network entitlement is required for this unsandboxed local build. macOS may withhold advertisements until the user permits access. Optional output audio does not capture the Mac microphone. The experimental bundle loads signed native engine/dependency dylibs; hardened-runtime library validation and notarization remain release work.

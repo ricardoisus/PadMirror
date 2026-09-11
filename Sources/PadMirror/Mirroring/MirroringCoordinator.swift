@@ -4,6 +4,10 @@ import Combine
 
 @MainActor
 final class MirroringCoordinator: ObservableObject {
+    enum Mode { case usb, airPlay }
+    @Published private(set) var mode: Mode = .usb
+    @Published private(set) var switching = false
+    let airPlay = AirPlayService()
     @Published var devices: [MirrorDevice] = []
     @Published var selectedID: String?
     @Published var message = "Conecte seu iPad via USB-C"
@@ -62,6 +66,7 @@ final class MirroringCoordinator: ObservableObject {
         guard ready else { return }
         captureDevices = discovery.devices()
         devices = captureDevices.map { MirrorDevice(id: $0.uniqueID, name: $0.localizedName) }
+        guard mode == .usb, !switching else { return }
         let next = DeviceSelection.automaticID(devices: devices, current: selectedID)
         if next != selectedID { select(next) }
         if selectedID == nil {
@@ -72,6 +77,7 @@ final class MirroringCoordinator: ObservableObject {
     }
 
     func select(_ id: String?) {
+        guard mode == .usb, !switching else { return }
         generation += 1
         let attempt = generation
         selectedID = id
@@ -94,12 +100,34 @@ final class MirroringCoordinator: ObservableObject {
         }
     }
 
-    func shutdown() {
+    func useAirPlay() {
+        guard !switching else { return }
+        generation += 1
+        selectedID = nil
+        sessionRunning = false
+        engine.stop()
+        mode = .airPlay
+        airPlay.start()
+    }
+
+    func useUSB() {
+        guard !switching else { return }
+        switching = true
+        airPlay.stop { [weak self] in
+            guard let self else { return }
+            self.mode = .usb
+            self.switching = false
+            self.refresh()
+        }
+    }
+
+    func shutdown(completion: @escaping () -> Void = {}) {
         generation += 1
         timer?.invalidate()
         timer = nil
         observers.forEach { NotificationCenter.default.removeObserver($0) }
         observers.removeAll()
         engine.stop()
+        airPlay.stop(completion: completion)
     }
 }

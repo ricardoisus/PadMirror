@@ -1,0 +1,20 @@
+--- a/uxplay.cpp
++++ b/uxplay.cpp
+@@ -395,6 +395,9 @@
+         va_end(v2);
+         g_log_forward(level, buf, g_log_forward_user);
+     }
++    // PadMirror: embedded host consumes only allowlisted state events.
++    // Never duplicate client names, metadata or credentials to stdout.
++    if (library_mode) return;
+     if (level > log_level) return;
+     switch (level) {
+     case 0:
+@@ -3746,6 +3749,7 @@
+         cleanup();
+         return 1;
+     }
++    LOGI("PADMIRROR_RECEIVER_READY");
+     reconnect:
+     compression_type = 0;
+     close_window = new_window_closing_behavior;

@@ -1,4 +1,4 @@
-name: macOS USB build
+name: macOS build
 on:
   push:
   pull_request:
@@ -21,3 +21,24 @@ jobs:
         with:
           name: PadMirror-experimental
           path: build/PadMirror-experimental.zip
+
+  wireless:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+      - name: Native engine dependencies
+        run: HOMEBREW_NO_AUTO_UPDATE=1 brew install cmake ninja pkg-config gstreamer libplist openssl@3
+      - name: Build pinned engine
+        run: ./scripts/build-airplay.sh
+      - name: Bundle wireless app
+        run: ./scripts/build.sh release --with-airplay
+      - name: Verify actual bundled runtime
+        run: python3 scripts/verify-airplay-bundle.py build/PadMirror.app
+      - name: Package wireless experiment
+        run: ditto -c -k --sequesterRsrc --keepParent build/PadMirror.app build/PadMirror-wireless-experimental.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PadMirror-wireless-experimental
+          path: build/PadMirror-wireless-experimental.zip
