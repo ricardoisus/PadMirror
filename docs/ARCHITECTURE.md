@@ -15,3 +15,4 @@ Implementação original baseada nos headers do SDK Apple e documentação públ
 Headers SDK local 26: CMIOHardwareSystem.h documenta UInt32 para opt-in (default descrito como 1); AVCaptureDevice.h define external desde macOS 14 e externalUnknown deprecated. Opt-in explícito evita depender do default. API pública não garante que cada iPad/OS entregue preview com comportamento igual ao QuickTime.
 
 DiscoverySession.devices é observado via KVO, com polling de segurança para confiança/desbloqueio. Evita a diferença de nomes Swift das notificações de conexão entre SDK 15 e SDK 26, encontrada no CI macOS 14.
+Notificações de erro/interrupção usam os valores públicos Objective-C estáveis (rawValue confirmado no SDK local), pois seus imports Swift também mudaram entre SDKs.

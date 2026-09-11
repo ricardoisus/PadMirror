@@ -33,7 +33,13 @@ final class MirroringCoordinator: ObservableObject {
                 }
             } catch { message = error.localizedDescription; return }
             ready = true
-            for name in [AVCaptureSession.runtimeErrorNotification, AVCaptureSession.wasInterruptedNotification] {
+            // Public Objective-C notification values are stable across SDKs whose
+            // Swift imports moved from Notification.Name to AVCaptureSession.
+            let sessionNotifications = [
+                Notification.Name("AVCaptureSessionRuntimeErrorNotification"),
+                Notification.Name("AVCaptureSessionWasInterruptedNotification")
+            ]
+            for name in sessionNotifications {
                 observers.append(NotificationCenter.default.addObserver(forName: name, object: engine.session, queue: .main) { [weak self] _ in
                     Task { @MainActor in
                         guard let self else { return }
