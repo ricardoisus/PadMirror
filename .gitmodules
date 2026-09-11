@@ -1,0 +1,3 @@
+[submodule "ThirdParty/Popyachsa-AirPlay"]
+	path = ThirdParty/Popyachsa-AirPlay
+	url = https://github.com/Recluse/Popyachsa-AirPlay.git

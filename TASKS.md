@@ -1,20 +1,14 @@
 # TASKS
 ## Fase atual
-Milestone 1 — aguardando validação física USB. Iniciado em 2026-09-10.
-## Concluído nesta sessão
-- [x] Templates adaptados; documentação canônica e GPL-3.0-or-later.
-- [x] Repositório GitHub privado ricardoisus/PadMirror; main e branch feat/usb-preview-proof.
-- [x] CoreMediaIO, discovery external/muxed com wireless desabilitado, PreviewLayer direto e NSWindow real.
-- [x] Seleção, observação de hotplug, tentativa manual e sessão em fila serial.
-- [x] Debug/Release compilados e bundle ad-hoc verificado localmente (Swift 6.3.3, SDK macOS 26).
-- [x] Seis casos comportamentais passaram via runner CLT e XCTest no CI. Build Release, empacotamento e upload também passaram no código 527e37f: https://github.com/ricardoisus/PadMirror/actions/runs/34548785404.
-- [x] Janela inicial inspecionada visualmente; depois da correção de descoberta, sessão iniciou com fonte muxed, mas preview permaneceu preto. Não foi observada imagem de iPad.
-## Próximos passos
-- [ ] Usuário conectar iPad físico; seguir docs/MANUAL_TEST_PLAN.md.
-- [ ] Confirmar imagem sem QuickTime, Freeform/Pencil, rotação, Meet e reconexão.
-- [ ] Só após gate físico: concluir M1, endurecer USB no M2 e integrar AirPlay no M3.
-## Bloqueios
-Build is complete. Physical iPad validation required.
-Não usar commit “working USB iOS screen mirroring” antes da prova real.
-## Decisões e descobertas
-PreviewLayer primeiro. isPreviewing e inputPriority indisponíveis no macOS; sessionRunning não prova frames. Inspeção local encontrou fonte external/muxed com transporte othr; removido filtro estrito USB que a descartava. Nenhuma engine AirPlay incluída. Áudio off. Métricas reais de latência/rotação ainda pendentes. Repositório privado durante desenvolvimento, conforme template; publicação open source ainda pendente.
+Milestone 3 — integração wireless autorizada pelo usuário após confirmação visual USB.
+## Validação USB
+- [x] Usuário relatou funcionamento; agente observou Freeform real na janela PadMirror.
+- [x] Captura direta por AVCaptureSession/PreviewLayer; não usa captura de janela nem automação QuickTime.
+- [x] CI USB e testes passaram.
+- [ ] Comparação de latência, rotação, reconexão e Meet ainda exigem testes separados.
+- Nota: havia um processo QuickTime aberto durante a inspeção visual; repetir com ele fechado para completar o cenário de independência física. O código não depende dele.
+## Em andamento
+→ Popyachsa pinado como submodule; C ABI in-process em NSView da mesma janela.
+→ Build da engine, pareamento por código e seleção explícita USB/AirPlay.
+## Decisões
+GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-update upstream. Áudio off por padrão. Código de acesso aleatório por ativação. Sem fallback que surpreenda o usuário.

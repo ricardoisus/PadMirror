@@ -1,6 +1,6 @@
 # Physical validation — milestone 1
 
-Status: NOT TESTED WITH PHYSICAL DEVICE.
+Status USB: Freeform real observado na janela após relato positivo do usuário. Rotação, latência, Meet e reconexão ainda não validados. Processo QuickTime estava aberto nessa observação; repetir com ele fechado.
 
 Local checks: Debug and Release builds pass; ad-hoc signature verified; initial NSWindow inspected visually. After accepting the locally observed external/muxed source (transport other), the session started but the preview remained black. This is NOT successful mirroring; connect/unlock/trust the physical iPad to continue diagnosis. Six device-selection cases pass using the CLT runner. Full XCTest, Release build and app artifact upload passed on GitHub Actions for code commit 527e37f (run 34548785404).
 
