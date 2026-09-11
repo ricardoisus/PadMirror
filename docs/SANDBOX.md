@@ -1,0 +1,2 @@
+# Sandbox and distribution
+Initial local app is not App Sandbox enabled. Camera privacy consent is required through NSCameraUsageDescription. No microphone use, Apple Events, screen recording API or QuickTime automation. No private entitlements. Bundle is ad-hoc signed for reproducible local testing, not notarized for distribution. Developer ID, hardened runtime camera entitlement and notarization must be validated before releases. App Store/sandbox compatibility remains untested.
