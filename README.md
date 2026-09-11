@@ -8,7 +8,7 @@ macOS 14+, Apple Silicon preferred, Xcode 16+ or compatible Command Line Tools.
 ```sh
 ./scripts/bootstrap.sh
 ./scripts/build.sh
-swift test
+./scripts/test.sh
 open build/PadMirror.app
 ```
 Open Package.swift in Xcode for source development. Always run the bundled app for privacy permission testing.

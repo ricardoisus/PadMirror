@@ -1,0 +1,23 @@
+name: macOS USB build
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: ./scripts/bootstrap.sh
+      - name: Unit tests
+        run: swift test
+      - name: Release app
+        run: ./scripts/build.sh release
+      - name: Package experimental app
+        run: ditto -c -k --sequesterRsrc --keepParent build/PadMirror.app build/PadMirror-experimental.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PadMirror-experimental
+          path: build/PadMirror-experimental.zip

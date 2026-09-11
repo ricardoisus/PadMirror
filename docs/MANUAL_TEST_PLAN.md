@@ -1,0 +1,36 @@
+# Physical validation — milestone 1
+
+Status: NOT TESTED WITH PHYSICAL DEVICE.
+
+Local checks: Debug and Release builds pass; ad-hoc signature verified; initial NSWindow inspected visually. Six device-selection cases pass using the CLT runner. Full XCTest requires Xcode and is configured in CI.
+
+1. Build with `./scripts/build.sh`; quit QuickTime and other capture apps.
+2. Open `build/PadMirror.app`. Without iPad, expect a normal resizable window and a USB connection hint.
+3. Allow camera access when macOS asks. If denied, enable PadMirror under System Settings → Privacy & Security → Camera and relaunch.
+4. Connect iPad Pro 11-inch M2 with a data-capable USB-C cable. Unlock it and accept Trust This Computer (enter passcode on the iPad).
+5. Expect the real iPad screen automatically. Report whether it is absent, black, frozen, or live. A running capture session alone is NOT a pass.
+6. Open Freeform; draw with Apple Pencil. Check responsiveness. Compare with QuickTime in a separate run, never simultaneously. Do not claim measured milliseconds without a high-speed external-camera test.
+7. Rotate portrait → landscape → portrait. Check image orientation and cropping. Resize the Mac window and enter fullscreen; image must remain proportional.
+8. In Google Meet select Share → Window → PadMirror. A second participant must see live Freeform, not a black image. macOS may separately request screen recording permission for the browser.
+9. Disconnect, reconnect and repeat unlock/trust as required. Try closing and reopening PadMirror.
+10. If available, connect a second iOS device. A selector must appear; switching must not leave an old stream or freeze the UI.
+11. Deny camera access in a separate run; verify the actionable message. Test another capture app competing for the device.
+
+## Return these results
+- macOS/iPadOS versions; build commit.
+- Real image without QuickTime: yes/no.
+- Rotation and resize: pass/fail.
+- Pencil latency versus separate QuickTime run: comparable/worse.
+- Remote Meet participant sees live window: yes/no.
+- Disconnect/reconnect: pass/fail.
+- Any displayed error (do not include personal screen content).
+
+## Technical logs
+Use Console.app and filter subsystem `org.padmirror.PadMirror`, or:
+```sh
+log stream --level info --predicate 'subsystem == "org.padmirror.PadMirror"'
+```
+Logs intentionally omit device names, IDs and frames.
+
+## Later gates (not implemented)
+AirPlay enable, pairing/rejection, Wi-Fi video/audio, rotation, clean shutdown, USB return and consented fallback. These cannot be marked passed by the USB build.
