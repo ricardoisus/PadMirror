@@ -28,15 +28,18 @@ final class USBDeviceDiscovery {
     }
 
     func devices() -> [AVCaptureDevice] {
-        // kIOAudioDeviceTransportTypeUSB = 'usb '. Muxed excludes normal UVC webcams.
+        // Screen-capture sources can report 'othr', even when tethered.
+        // Do not require transportType == 'usb '. Wireless was disabled above.
+        // External + muxed excludes ordinary video-only webcams; physical validation
+        // remains necessary to identify the platform-provided screen source.
         let candidates = discovery?.devices ?? []
-        let usb = candidates.filter { $0.transportType == 0x75736220 && $0.isConnected }
-        let counts = "muxed=\(candidates.count) usb=\(usb.count)"
+        let connected = candidates.filter { $0.isConnected }
+        let counts = "muxed=\(candidates.count) connected=\(connected.count)"
         if counts != lastCounts {
             logger.info("Discovery counts: \(counts, privacy: .public)")
             lastCounts = counts
         }
-        return usb
+        return connected
     }
 }
 
