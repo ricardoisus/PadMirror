@@ -4,6 +4,8 @@ PadMirror mirrors your iPhone or iPad to a normal macOS window.
 **USB: Freeform image confirmed on physical iPad. Wireless: experimental Popyachsa/UxPlay integration; physical validation in progress.**
 
 ## Build from source
+For a drag-and-drop Mac installer, see [installation instructions](docs/INSTALL.md) and [downloads](https://github.com/ricardoisus/PadMirror/releases). Initial installers are experimental USB builds, without Apple notarization.
+
 macOS 14+, Apple Silicon preferred, Xcode 16+ or compatible Command Line Tools.
 ```sh
 ./scripts/bootstrap.sh
@@ -11,6 +13,7 @@ macOS 14+, Apple Silicon preferred, Xcode 16+ or compatible Command Line Tools.
 ./scripts/test.sh
 open build/PadMirror.app
 ```
+Generate a DMG for your Mac's architecture with `./scripts/package.sh`.
 Open Package.swift in Xcode for source development. Always run the bundled app for privacy permission testing.
 
 ## Usage

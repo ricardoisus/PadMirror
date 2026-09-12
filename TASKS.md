@@ -26,3 +26,9 @@ GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-upda
 - [x] Build local com AirPlay e assinatura, 24 casos comportamentais existentes aprovados. Teste de regressão da pausa USB aprovado no XCTest do CI (run 34681004113). Verificação local das 17 factories, 8 símbolos e assinaturas passou.
 - [ ] Validação física do novo hover, reconexão, fullscreen e Meet; aprovação visual anterior não valida estes novos cenários.
 - Implementação concluída no PR #3; integração autorizada pelo usuário, condicionada ao CI aprovado.
+
+## Sessão — distribuição pública
+- [x] DMG USB arm64 gerado; build Release, 24 casos comportamentais, integridade do DMG e assinatura do app montado aprovados. Instruções de instalação incluídas.
+- [x] Repositório público; instalador preparado para pré-release v0.1.0-usb-preview.1.
+- [ ] Developer ID/notarização e teste de instalação em outro Mac; validações físicas anteriores continuam pendentes.
+- Histórico: 93 blobs revisados por padrões de credenciais; nenhuma ocorrência encontrada (não é garantia exaustiva).

@@ -1,5 +1,8 @@
 # Changelog
 ## [Unreleased]
+### Distribuição
+- Instalador DMG USB experimental com atalho para Aplicativos, licença, instruções e SHA-256; build Release e verificação de integridade automáticos.
+- Documentadas instalação, limitações físicas e ausência de notarização Apple.
 ### Adicionado
 - Janela limpa automaticamente durante captura USB ou streaming AirPlay, sem título ou botões de janela. Controles USB/AirPlay e desconexão aparecem ao passar o mouse; sair da janela os oculta.
 - Desconexão USB explícita pausa a reconexão automática até clicar em USB. Estado de conexão restaura a interface sem recriar janela ou renderizadores.
