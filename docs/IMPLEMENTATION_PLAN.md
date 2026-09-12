@@ -1,6 +1,6 @@
 # Milestones
 
-Estado em 2026-09-12: USB observado fisicamente e AirPlay confirmado funcionando pelo usuário. Integração C ABI implementada. DMG USB publicado e instalador completo USB + AirPlay preparado para v0.1.0-airplay-preview.1; Developer ID/notarização e testes físicos complementares pendentes. A lista abaixo preserva os gates e o planejamento; não representa itens todos concluídos.
+Estado em 2026-09-12: USB observado fisicamente e AirPlay confirmado funcionando pelo usuário. Integração C ABI implementada. DMG USB publicado e instalador completo USB + AirPlay publicado em v0.1.0-airplay-preview.1; Developer ID/notarização e testes físicos complementares pendentes. A lista abaixo preserva os gates e o planejamento; não representa itens todos concluídos.
 
 1. USB vertical slice: build, CoreMediaIO, discovery, PreviewLayer, NSWindow. Gate: iPad físico, Freeform, rotação, Meet e comparação de latência. Somente após aprovação física usar commit `feat: working USB iOS screen mirroring`.
 2. Reconexão robusta, seleção, presentation mode, controles, preferências e testes. Commit production-ready somente após testes adequados.

@@ -1,6 +1,6 @@
 # TASKS
 ## Fase atual
-USB e AirPlay funcionando: confirmação do usuário para AirPlay em 2026-09-12. Distribuição pública USB disponível; testes físicos complementares e notarização pendentes.
+USB e AirPlay funcionando: confirmação do usuário para AirPlay em 2026-09-12. Distribuição pública USB + AirPlay disponível em v0.1.0-airplay-preview.1; testes físicos complementares e notarização pendentes.
 ## Validação USB
 - [x] Usuário relatou funcionamento; agente observou Freeform real na janela PadMirror.
 - [x] Captura direta por AVCaptureSession/PreviewLayer; não usa captura de janela nem automação QuickTime.
@@ -37,8 +37,10 @@ GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-upda
 ## Sessão — confirmação AirPlay e integração
 - [x] README, produto, instalação, créditos e planos atualizados com confirmação AirPlay e estado da publicação.
 - [x] Build Release com AirPlay, 24 casos comportamentais, 17 factories, 8 símbolos ABI, assinaturas e revisão do diff aprovados.
-- Integração da distribuição na main e remoção de feat/distribution autorizadas pelo usuário; executar após CI aprovado.
+- [x] Distribuição integrada na main e feat/distribution removida após CI aprovado.
 
 ## Sessão — instalador completo
 - [x] DMG USB + AirPlay gerado e verificado montado: 58 bibliotecas/plugins, 17 factories, 8 símbolos ABI, assinaturas válidas e 24 testes comportamentais aprovados.
-- [ ] Publicar v0.1.0-airplay-preview.1 com fontes correspondentes; build local arm64 exige macOS 26.6.2+.
+- [x] v0.1.0-airplay-preview.1 publicada com DMG completo, fontes correspondentes das 22 dependências e SHA-256; hashes dos três assets conferidos no GitHub. Build local arm64 exige macOS 26.6.2+.
+- [x] CI USB/wireless aprovado no run 34681992220; DMG completo também gerado pelo CI.
+- [ ] Notarização Apple e instalação em outro Mac continuam pendentes.
