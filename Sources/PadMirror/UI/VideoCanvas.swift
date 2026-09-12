@@ -51,7 +51,12 @@ struct AirPlayCanvas: NSViewRepresentable {
 
 struct MirrorContentView: View {
     @ObservedObject var coordinator: MirroringCoordinator
+    @ObservedObject var airPlay: AirPlayService
     @State private var hovering = false
+    private var connected: Bool {
+        coordinator.mode == .usb ? coordinator.sessionRunning : airPlay.state == .streaming
+    }
+    private var controlsVisible: Bool { hovering || !connected }
     var body: some View {
         ZStack {
             VideoCanvas(session: coordinator.engine.session)
@@ -64,7 +69,7 @@ struct MirrorContentView: View {
                 VStack(spacing: 18) {
                     Image(systemName: "ipad.and.iphone").font(.system(size: 42))
                     Text(coordinator.message).multilineTextAlignment(.center)
-                    Text("Desbloqueie o dispositivo e use um cabo de dados.")
+                    Text(coordinator.usbPaused ? "Clique em USB para reconectar." : "Desbloqueie o dispositivo e use um cabo de dados.")
                         .font(.caption).foregroundStyle(.secondary)
                     if coordinator.selectedID != nil {
                         Button("Tentar novamente") { coordinator.select(coordinator.selectedID) }
@@ -76,29 +81,34 @@ struct MirrorContentView: View {
             if coordinator.mode == .airPlay {
                 AirPlayOverlay(service: coordinator.airPlay, hovering: hovering)
             }
-            VStack {
-                HStack(spacing: 14) {
-                    Button("USB") { coordinator.useUSB() }
-                        .disabled(coordinator.mode == .usb || coordinator.switching)
-                    Button("AirPlay") { coordinator.useAirPlay() }
-                        .disabled(coordinator.mode == .airPlay || coordinator.switching)
-                    if coordinator.mode == .usb && coordinator.devices.count > 1 {
-                        Picker("Dispositivo", selection: Binding(get: { coordinator.selectedID ?? "" },
-                            set: { coordinator.select($0.isEmpty ? nil : $0) })) {
-                            Text("Escolha…").tag("")
-                            ForEach(coordinator.devices) { Text($0.name).tag($0.id) }
-                        }.frame(maxWidth: 260)
-                    }
+            if controlsVisible {
+                VStack {
+                    HStack(spacing: 14) {
+                        Button("USB") { coordinator.useUSB() }
+                            .disabled(coordinator.mode == .usb && !coordinator.usbPaused || coordinator.switching)
+                        Button("AirPlay") { coordinator.useAirPlay() }
+                            .disabled(coordinator.mode == .airPlay || coordinator.switching)
+                        if coordinator.mode == .usb && coordinator.devices.count > 1 {
+                            Picker("Dispositivo", selection: Binding(get: { coordinator.selectedID ?? "" },
+                                set: { coordinator.select($0.isEmpty ? nil : $0) })) {
+                                Text("Escolha…").tag("")
+                                ForEach(coordinator.devices) { Text($0.name).tag($0.id) }
+                            }.frame(maxWidth: 260)
+                        }
+                        Spacer()
+                        if coordinator.mode == .usb && coordinator.sessionRunning {
+                            Button("Desconectar") { coordinator.disconnectUSB() }
+                        }
+                        if coordinator.mode == .airPlay && !coordinator.devices.isEmpty {
+                            Button("USB disponível — trocar") { coordinator.useUSB() }
+                                .disabled(coordinator.switching)
+                        }
+                    }.padding(12).background(.ultraThinMaterial)
                     Spacer()
-                    if coordinator.mode == .airPlay && !coordinator.devices.isEmpty {
-                        Button("USB disponível — trocar") { coordinator.useUSB() }
-                            .disabled(coordinator.switching)
-                    }
-                }.padding(12).background(.ultraThinMaterial)
-                    .opacity(hovering || !coordinator.sessionRunning && coordinator.mode == .usb ? 1 : 0)
-                Spacer()
+                }
             }
-        }.background(.black).foregroundStyle(.white).preferredColorScheme(.dark)
+        }.ignoresSafeArea(.container, edges: connected ? .all : [])
+            .background(.black).foregroundStyle(.white).preferredColorScheme(.dark)
             .onHover { hovering = $0 }
     }
 }

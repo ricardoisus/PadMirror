@@ -34,3 +34,13 @@ Logs intentionally omit device names, IDs and frames.
 
 ## Later gates (not implemented)
 AirPlay enable, pairing/rejection, Wi-Fi video/audio, rotation, clean shutdown, USB return and consented fallback. These cannot be marked passed by the USB build.
+
+## Automatic connected interface
+- With live USB video, verify the title/window buttons hide automatically, without any presentation button or shortcut. Move the pointer outside the window: only the proportional image and any black bars remain.
+- Hover over the image: USB/AirPlay and Desconectar appear. Move out again: controls disappear. Repeat over the top edge and in fullscreen.
+- Click USB Desconectar and wait at least three seconds: capture stays stopped, the normal title returns, and USB reconnects only when clicked. Also unplug/replug during this pause; it must remain paused.
+- Unplug while streaming normally: status and title return, and reconnecting restores automatic capture and clean chrome.
+- Resize and switch USB/AirPlay repeatedly; the same renderers and window must remain attached.
+- With live AirPlay, verify identical chrome/hover behavior, including the bottom disconnect control. Disconnect and verify pairing/status UI and window buttons return.
+- Share the same window in Meet. A remote participant must confirm live content without title/controls when the pointer is outside, and visible controls while hovering.
+- User confirmed the preceding manual presentation implementation visually. These new automatic/hover checks remain pending physical validation; build/tests are not proof of remote capture.

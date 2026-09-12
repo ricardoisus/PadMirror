@@ -12,6 +12,7 @@ final class MirroringCoordinator: ObservableObject {
     @Published var selectedID: String?
     @Published var message = "Conecte seu iPad via USB-C"
     @Published var sessionRunning = false
+    @Published private(set) var usbPaused = false
     let engine = USBCaptureEngine()
     private let discovery = USBDeviceDiscovery()
     private var timer: Timer?
@@ -66,7 +67,7 @@ final class MirroringCoordinator: ObservableObject {
         guard ready else { return }
         captureDevices = discovery.devices()
         devices = captureDevices.map { MirrorDevice(id: $0.uniqueID, name: $0.localizedName) }
-        guard mode == .usb, !switching else { return }
+        guard mode == .usb, !switching, !usbPaused else { return }
         let next = DeviceSelection.automaticID(devices: devices, current: selectedID)
         if next != selectedID { select(next) }
         if selectedID == nil {
@@ -78,6 +79,7 @@ final class MirroringCoordinator: ObservableObject {
 
     func select(_ id: String?) {
         guard mode == .usb, !switching else { return }
+        usbPaused = false
         generation += 1
         let attempt = generation
         selectedID = id
@@ -110,8 +112,19 @@ final class MirroringCoordinator: ObservableObject {
         airPlay.start()
     }
 
+    func disconnectUSB() {
+        guard mode == .usb, !switching else { return }
+        generation += 1
+        usbPaused = true
+        selectedID = nil
+        sessionRunning = false
+        message = "USB desconectado."
+        engine.stop()
+    }
+
     func useUSB() {
         guard !switching else { return }
+        usbPaused = false
         switching = true
         airPlay.stop { [weak self] in
             guard let self else { return }
