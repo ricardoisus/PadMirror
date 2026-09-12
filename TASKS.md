@@ -23,6 +23,6 @@ GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-upda
 ## Sessão — interface automática
 - [x] Usuário confirmou visualmente o modo apresentação anterior; substituído conforme pedido por janela limpa durante conexão, sem toggle manual.
 - [x] Controles USB/AirPlay e desconexão no hover; desconexão USB pausa reconexão automática até ação explícita.
-- [x] Build local com AirPlay e assinatura, 24 casos comportamentais existentes aprovados. Teste de regressão da pausa USB adicionado.
+- [x] Build local com AirPlay e assinatura, 24 casos comportamentais existentes aprovados. Teste de regressão da pausa USB aprovado no XCTest do CI (run 34681004113). Verificação local das 17 factories, 8 símbolos e assinaturas passou.
 - [ ] Validação física do novo hover, reconexão, fullscreen e Meet; aprovação visual anterior não valida estes novos cenários.
-- Integração solicitada pelo usuário; merge após verificações e CI.
+- Implementação concluída no PR #3; integração autorizada pelo usuário, condicionada ao CI aprovado.
