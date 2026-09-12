@@ -10,7 +10,9 @@ from pathlib import Path
 import shutil
 src = Path('ThirdParty/Popyachsa-AirPlay/third_party/uxplay')
 dst = Path('.build/airplay-source')
-shutil.copytree(src, dst, dirs_exist_ok=True, ignore=shutil.ignore_patterns('.git', 'build*'))
+if dst.exists():
+    shutil.rmtree(dst)  # generated build copy only; never the pinned submodule
+shutil.copytree(src, dst, ignore=shutil.ignore_patterns('.git'))
 PY
 git apply --directory=.build/airplay-source patches/0001-embedded-privacy-and-readiness.patch
 cmake -S .build/airplay-source -B .build/airplay-engine -G Ninja \

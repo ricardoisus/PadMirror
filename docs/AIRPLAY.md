@@ -40,3 +40,6 @@ The Swift USB app targets macOS 14+. A wireless bundle built using Homebrew bott
 - Stop while connecting, disconnect/reconnect, repeat start/stop, quit during connection.
 - Reconnect USB while streaming: offer an explicit switch; no silent takeover.
 - Google Meet participant sees the AirPlay image in the same PadMirror window.
+
+## Evidências em 2026-09-12
+CI USB/wireless passou no run 34599799897. Rebuild local e 24 checks comportamentais passaram; bundle validado com 17 factories, oito símbolos e assinaturas. A versão atual resolveu seu anúncio Bonjour com pw=true e mostrou o código na janela. Vídeo wireless físico ainda não confirmado.

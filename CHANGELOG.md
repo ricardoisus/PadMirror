@@ -12,3 +12,6 @@
 - Native C ABI AirPlay backend in the same window, access password per activation, optional audio, explicit USB switching.
 - Bonjour readiness verification, bundled runtime/plugin checks and protocol-event tests.
 - Basic USB Freeform image confirmed by user and visually inspected; extended physical test matrix remains open.
+
+### Corrigido — build wireless
+- Recria a cópia gerada do upstream antes de aplicar patches, evitando arquivos antigos em rebuilds/atualizações.
