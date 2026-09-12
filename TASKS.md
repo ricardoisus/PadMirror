@@ -44,3 +44,8 @@ GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-upda
 - [x] v0.1.0-airplay-preview.1 publicada com DMG completo, fontes correspondentes das 22 dependências e SHA-256; hashes dos três assets conferidos no GitHub. Build local arm64 exige macOS 26.6.2+.
 - [x] CI USB/wireless aprovado no run 34681992220; DMG completo também gerado pelo CI.
 - [ ] Notarização Apple e instalação em outro Mac continuam pendentes.
+
+## Sessão — instalação neste Mac
+- [x] Bundle completo instalado em /Applications/PadMirror.app e registrado em Aplicativos; processo iniciado dessa cópia. Build Release, 24 casos comportamentais, 17 factories, 8 símbolos ABI e assinaturas aprovados.
+- [x] Código anterior e instalador completo confirmados no GitHub; registro desta sessão será enviado em codex/install-mac antes da limpeza autorizada do checkout e builds locais.
+- Limpeza condicionada à confirmação do commit remoto. Abertura do processo não substitui os testes físicos pendentes.

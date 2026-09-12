@@ -1,5 +1,7 @@
 # Changelog
 ## [Unreleased]
+### Instalação local
+- Bundle completo USB + AirPlay instalado em Aplicativos neste Mac, com abertura e integridade verificadas; limpeza do checkout local autorizada após preservação no remoto.
 ### Instalador completo
 - DMG padrão inclui USB + AirPlay, com engine reconstruída, dependências e validação automática do bundle. USB-only passa a ser opção explícita.
 - Nome do download e BUILD.txt identificam edição, arquitetura e versão mínima real do macOS.
