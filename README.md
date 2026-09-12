@@ -1,7 +1,7 @@
 # PadMirror
 PadMirror mirrors your iPhone or iPad to a normal macOS window.
 
-**USB: Freeform image confirmed on physical iPad. Wireless: experimental Popyachsa/UxPlay integration; physical validation in progress.**
+**USB and AirPlay mirroring work: USB Freeform was observed on a physical iPad; the user confirmed AirPlay working on 2026-09-12. Extended physical checks remain pending.**
 
 ## Build from source
 For a drag-and-drop Mac installer, see [installation instructions](docs/INSTALL.md) and [downloads](https://github.com/ricardoisus/PadMirror/releases). Initial installers are experimental USB builds, without Apple notarization.

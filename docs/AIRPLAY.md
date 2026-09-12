@@ -42,4 +42,4 @@ The Swift USB app targets macOS 14+. A wireless bundle built using Homebrew bott
 - Google Meet participant sees the AirPlay image in the same PadMirror window.
 
 ## Evidências em 2026-09-12
-CI USB/wireless passou no run 34599799897. Rebuild local e 24 checks comportamentais passaram; bundle validado com 17 factories, oito símbolos e assinaturas. A versão atual resolveu seu anúncio Bonjour com pw=true e mostrou o código na janela. Vídeo wireless físico ainda não confirmado.
+CI USB/wireless passou no run 34599799897. Rebuild local e 24 checks comportamentais passaram; bundle validado com 17 factories, oito símbolos e assinaturas. A versão atual resolveu seu anúncio Bonjour com pw=true e mostrou o código na janela. Em seguida, o usuário confirmou AirPlay funcionando em 2026-09-12. A confirmação valida o funcionamento básico relatado; os cenários específicos acima ainda não foram detalhados.

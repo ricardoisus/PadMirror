@@ -32,8 +32,8 @@ log stream --level info --predicate 'subsystem == "org.padmirror.PadMirror"'
 ```
 Logs intentionally omit device names, IDs and frames.
 
-## Later gates (not implemented)
-AirPlay enable, pairing/rejection, Wi-Fi video/audio, rotation, clean shutdown, USB return and consented fallback. These cannot be marked passed by the USB build.
+## AirPlay — implemented; extended checks pending
+The user confirmed AirPlay working on 2026-09-12. This is a user report of basic operation. Pairing/rejection, cable-disconnected setup, rotation, optional audio, clean shutdown, USB return and Meet still need individually recorded results; see AIRPLAY.md. Switching USB/AirPlay is explicit, without automatic fallback.
 
 ## Automatic connected interface
 - With live USB video, verify the title/window buttons hide automatically, without any presentation button or shortcut. Move the pointer outside the window: only the proportional image and any black bars remain.
