@@ -1,5 +1,9 @@
 # Changelog
 ## [Unreleased]
+### Instalador completo
+- DMG padrão inclui USB + AirPlay, com engine reconstruída, dependências e validação automática do bundle. USB-only passa a ser opção explícita.
+- Nome do download e BUILD.txt identificam edição, arquitetura e versão mínima real do macOS.
+- Inventário de fontes/licenças inclui dependências estáticas e receitas Homebrew, sem caminhos pessoais dos recibos.
 ### Validação e publicação
 - Funcionamento AirPlay confirmado pelo usuário em 2026-09-12; testes específicos de áudio, rotação, reconexão e Meet continuam pendentes.
 - Repositório público e pré-release USB v0.1.0-usb-preview.1 publicada para Apple Silicon.

@@ -1,5 +1,7 @@
 # Wireless integration
 
+The complete USB + AirPlay DMG is available from https://github.com/ricardoisus/PadMirror/releases/tag/v0.1.0-airplay-preview.1. Its local Apple Silicon build requires macOS 26.6.2+ and includes runtime dependencies.
+
 ## Build and use
 ```sh
 # Installs native build/runtime dependencies; no Rust needed.
@@ -30,7 +32,7 @@ A reproducible patch in `patches/0001-embedded-privacy-and-readiness.patch` supp
 ## Packaging and compatibility
 `bundle-airplay.py` copies a closed Mach-O dependency graph into the app, rewrites dependency references to loader-relative paths, signs each library and copies package license texts/versions. `verify-airplay-bundle.py` loads the bundled registry and checks real plugin factories and all ABI exports, plus nested signatures.
 
-The Swift USB app targets macOS 14+. A wireless bundle built using Homebrew bottles is conservatively marked with the build host's OS version; compiling the engine with a lower deployment target does not lower its precompiled dependencies' minimum OS. The local build was produced on macOS 26.6.2. A separate CI build on macOS 14 validates that environment; cross-version universal release packaging remains a later milestone. This is an ad-hoc signed experimental build, not a notarized public release.
+The Swift USB app targets macOS 14+. A wireless bundle built using Homebrew bottles is conservatively marked with the build host's OS version; compiling the engine with a lower deployment target does not lower its precompiled dependencies' minimum OS. The local build was produced on macOS 26.6.2. A separate CI build on macOS 14 validates that environment; cross-version universal release packaging remains a later milestone. This is an ad-hoc signed experimental build, without Apple notarization.
 
 ## Remaining physical checks
 - Receiver appears on iPad on the same Wi-Fi after permission.

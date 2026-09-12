@@ -30,10 +30,8 @@ jobs:
           submodules: recursive
       - name: Native engine dependencies
         run: HOMEBREW_NO_AUTO_UPDATE=1 brew install cmake ninja pkg-config gstreamer libplist openssl@3
-      - name: Build pinned engine
-        run: ./scripts/build-airplay.sh
-      - name: Bundle wireless app
-        run: ./scripts/build.sh release --with-airplay
+      - name: Package USB + AirPlay DMG
+        run: ./scripts/package.sh
       - name: Verify actual bundled runtime
         run: python3 scripts/verify-airplay-bundle.py build/PadMirror.app
       - name: Package wireless experiment
@@ -41,4 +39,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: PadMirror-wireless-experimental
-          path: build/PadMirror-wireless-experimental.zip
+          path: |
+            build/PadMirror-wireless-experimental.zip
+            build/*usb-airplay*.dmg
+            build/*usb-airplay*.sha256

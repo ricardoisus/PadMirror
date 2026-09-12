@@ -38,3 +38,7 @@ GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-upda
 - [x] README, produto, instalação, créditos e planos atualizados com confirmação AirPlay e estado da publicação.
 - [x] Build Release com AirPlay, 24 casos comportamentais, 17 factories, 8 símbolos ABI, assinaturas e revisão do diff aprovados.
 - Integração da distribuição na main e remoção de feat/distribution autorizadas pelo usuário; executar após CI aprovado.
+
+## Sessão — instalador completo
+- [x] DMG USB + AirPlay gerado e verificado montado: 58 bibliotecas/plugins, 17 factories, 8 símbolos ABI, assinaturas válidas e 24 testes comportamentais aprovados.
+- [ ] Publicar v0.1.0-airplay-preview.1 com fontes correspondentes; build local arm64 exige macOS 26.6.2+.

@@ -73,6 +73,9 @@ while queue:
     subprocess.run(commands + [str(dest)], check=True, capture_output=True)
     manifest.append({'file': str(dest.relative_to(app)), 'source': str(src)})
 
+# Include static engine dependencies in the same source/license inventory.
+for formula in ('libplist', 'openssl@3'):
+    owners.add(Path(output('brew', '--prefix', formula)).resolve())
 # Preserve all available package license texts alongside exact formula versions.
 for owner in sorted(owners):
     target = notices / (owner.parent.name + '-' + owner.name)
@@ -86,18 +89,12 @@ for owner in sorted(owners):
     if receipt.exists():
         data = json.loads(receipt.read_text())
         (target / 'build-source.json').write_text(json.dumps({
-            'formula': owner.parent.name, 'version': owner.name, 'source': data.get('source', {})
+            'formula': owner.parent.name, 'version': owner.name,
+            'source': {key: value for key, value in data.get('source', {}).items() if key != 'path'}
         }, indent=2))
-# Static engine dependencies are not present in the Mach-O import graph.
-for formula in ('libplist', 'openssl@3'):
-    owner = Path(output('brew', '--prefix', formula)).resolve()
-    target = notices / (formula + '-' + owner.name)
-    target.mkdir(exist_ok=True)
-    for path in owner.rglob('*'):
-        if path.is_file() and any(path.name.upper().startswith(x) for x in ('LICENSE', 'COPYING', 'COPYRIGHT', 'NOTICE')):
-            relative = path.relative_to(owner)
-            (target / relative).parent.mkdir(parents=True, exist_ok=True)
-            shutil.copy2(path, target / relative)
+    recipe = owner / '.brew' / (owner.parent.name + '.rb')
+    if recipe.is_file():
+        shutil.copy2(recipe, target / recipe.name)
 for path in [root/'LICENSE', root/'THIRD_PARTY_NOTICES.md',
              root/'ThirdParty/Popyachsa-AirPlay/NOTICE',
              root/'ThirdParty/Popyachsa-AirPlay/LICENSE',

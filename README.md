@@ -4,7 +4,7 @@ PadMirror mirrors your iPhone or iPad to a normal macOS window.
 **USB and AirPlay mirroring work: USB Freeform was observed on a physical iPad; the user confirmed AirPlay working on 2026-09-12. Extended physical checks remain pending.**
 
 ## Build from source
-For a drag-and-drop Mac installer, see [installation instructions](docs/INSTALL.md) and [downloads](https://github.com/ricardoisus/PadMirror/releases). Initial installers are experimental USB builds, without Apple notarization.
+For a drag-and-drop Mac installer, see [installation instructions](docs/INSTALL.md) and [downloads](https://github.com/ricardoisus/PadMirror/releases). The complete installer includes USB + AirPlay and its runtime dependencies, without Apple notarization. Check the macOS minimum and architecture on the release; the local complete build requires macOS 26.6.2+ on Apple Silicon. The older USB-only preview remains available for macOS 14+.
 
 macOS 14+, Apple Silicon preferred, Xcode 16+ or compatible Command Line Tools.
 ```sh
