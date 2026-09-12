@@ -19,3 +19,10 @@ Milestone 3 — integração wireless autorizada pelo usuário após confirmaç�
 PadMirror aberto em AirPlay. Selecionar o receptor no iPad e informar se Freeform aparece sem USB. Anúncio confirmado não prova transmissão de vídeo.
 ## Decisões
 GPL-3.0-or-later. Sem Rust no host. Sem HLS, gravação, telemetria ou auto-update upstream. Áudio off por padrão. Código de acesso aleatório por ativação. Sem fallback que surpreenda o usuário.
+
+## Sessão — interface automática
+- [x] Usuário confirmou visualmente o modo apresentação anterior; substituído conforme pedido por janela limpa durante conexão, sem toggle manual.
+- [x] Controles USB/AirPlay e desconexão no hover; desconexão USB pausa reconexão automática até ação explícita.
+- [x] Build local com AirPlay e assinatura, 24 casos comportamentais existentes aprovados. Teste de regressão da pausa USB adicionado.
+- [ ] Validação física do novo hover, reconexão, fullscreen e Meet; aprovação visual anterior não valida estes novos cenários.
+- Integração solicitada pelo usuário; merge após verificações e CI.

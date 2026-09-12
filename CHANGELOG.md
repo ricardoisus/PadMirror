@@ -1,6 +1,8 @@
 # Changelog
 ## [Unreleased]
 ### Adicionado
+- Janela limpa automaticamente durante captura USB ou streaming AirPlay, sem título ou botões de janela. Controles USB/AirPlay e desconexão aparecem ao passar o mouse; sair da janela os oculta.
+- Desconexão USB explícita pausa a reconexão automática até clicar em USB. Estado de conexão restaura a interface sem recriar janela ou renderizadores.
 - Fundação documental baseada nos templates fornecidos.
 - Prova USB nativa com CoreMediaIO, AVFoundation e PreviewLayer, ainda não validada com hardware.
 
